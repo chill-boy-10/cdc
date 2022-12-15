@@ -1,0 +1,91 @@
+import java.util.*;
+
+public class ANAL{
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<String> operator = new ArrayList<>();
+        operator.add("+");
+        operator.add("-");
+        operator.add("*");
+        operator.add("/");
+        operator.add("<<");
+        operator.add(">>");
+        operator.add("|");
+        operator.add("&");
+        operator.add("=");
+
+        ArrayList<String> keyword = new ArrayList<>();
+        keyword.add("abstract");
+        keyword.add("boolean");
+        keyword.add("break");
+        keyword.add("byte");
+        keyword.add("case");
+        keyword.add("catch");
+        keyword.add("char");
+        keyword.add("class");
+        keyword.add("continue");
+        keyword.add("default");
+        keyword.add("do");
+        keyword.add("double");
+        keyword.add("else");
+        keyword.add("extends");
+        keyword.add("final");
+        keyword.add("finally");
+        keyword.add("float");
+        keyword.add("implements");
+        keyword.add("import");
+        keyword.add("instanceof");
+        keyword.add("int");
+        keyword.add("interface");
+        keyword.add("long");
+        keyword.add("native");
+        keyword.add("new");
+        keyword.add("package");
+        keyword.add("protected");
+        keyword.add("public");
+        keyword.add("return");
+        keyword.add("short");
+        keyword.add("static");
+        keyword.add("super");
+        keyword.add("switch");
+        keyword.add("synchronized");
+        keyword.add("this");
+        keyword.add("throws");
+        keyword.add("transient");
+        keyword.add("try");
+        keyword.add("void");
+        keyword.add("volatile");
+        keyword.add("while");
+        keyword.add("strictfp");
+        keyword.add("enum");
+        keyword.add("goto");
+        keyword.add("const");
+
+        ArrayList<String> separator = new ArrayList<>();
+        separator.add(":");
+        separator.add(";");
+        separator.add(".");
+        separator.add(",");
+        separator.add(" ");
+
+        String str= sc.nextLine();
+        String[] tokens = str.split(" ");
+
+        for(int i=0; i<tokens.length; i++){
+            if(keyword.contains(tokens[i])){
+                System.out.println("Keyword: "+tokens[i]);
+            }
+            else if(operator.contains(tokens[i])){
+                System.out.println("Operators: "+tokens[i]);
+            }
+            else if(separator.contains(tokens[i])){
+                System.out.println("Separators: "+tokens[i]);
+            }
+            else{
+                System.out.println("Identifiers: "+tokens[i]);
+            }
+        }
+    }
+}

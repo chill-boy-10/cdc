@@ -1,0 +1,84 @@
+import java.util.*;
+public class Lexicography {
+    public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter input:");
+        String input = sc.nextLine();
+        generateTokens(input);
+    }
+
+    public static void generateTokens(String input) {
+        ArrayList<String> list = new ArrayList<>();
+
+        int left = 0;
+        int right = 0;
+
+        HashSet<String> operatorSet = new HashSet<>();
+        operatorSet.add("+");
+        operatorSet.add("-");
+        operatorSet.add("*");
+        operatorSet.add("/");
+        operatorSet.add("%");
+        operatorSet.add("!");
+        operatorSet.add("&");
+        operatorSet.add("|");
+        operatorSet.add(">>");
+        operatorSet.add("<<");
+        operatorSet.add("=");
+
+        HashSet<String> specialSymbol = new HashSet<>();
+        specialSymbol.add(";");
+        specialSymbol.add(",");
+        specialSymbol.add(".");
+
+        HashSet<String> keywordSet = new HashSet<>();
+        keywordSet.add("int");
+        keywordSet.add("float");
+        keywordSet.add("double");
+        keywordSet.add("char");
+        keywordSet.add("boolean");
+        keywordSet.add("true");
+        keywordSet.add("false");
+        keywordSet.add("main");
+        keywordSet.add("String");
+        keywordSet.add("Character");
+        keywordSet.add("while");
+        keywordSet.add("for");
+        keywordSet.add("public");
+        keywordSet.add("private");
+        keywordSet.add("class");
+        keywordSet.add("import");
+        keywordSet.add("new");
+
+        while (right < input.length()) {
+            String token = "";
+            if (Character.isAlphabetic(input.charAt(right))) {
+                while (right < input.length() && Character.isLetterOrDigit(input.charAt(right))) {
+                    token += input.charAt(right);
+                    right++;
+                }
+                if (keywordSet.contains(token)) {
+                    System.out.println(token + " is keyword");
+                } else
+                    System.out.println(token + " is identifier");
+            } else if (Character.isDigit(input.charAt(right))) {
+                while (right < input.length() && Character.isDigit(input.charAt(right))) {
+                    // System.out.print("Digit: " + input.charAt(right));
+                    token += input.charAt(right);
+                    right++;
+                }
+                System.out.println(token + " is a Constant");
+                // break;
+            } else if (operatorSet.contains(String.valueOf(input.charAt(right)))) {
+                token += input.charAt(right);
+                right++;
+                System.out.println(token + " is a operator");
+            } else {
+                token += input.charAt(right);
+                right++;
+                System.out.println(token + " is a special Symbol");
+            }
+
+        }
+    }
+}

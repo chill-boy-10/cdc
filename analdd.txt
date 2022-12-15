@@ -1,0 +1,116 @@
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Scanner;;
+public class lexical {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter string:");
+        String ss=sc.nextLine();
+        String word="";
+        char s;
+        HashSet<String> map=new HashSet<String>();
+        map.add(":");
+        map.add(";");
+        map.add(".");
+        map.add(",");
+        map.add(" ");
+
+        HashSet<String> operator=new HashSet<String>();
+        operator.add("+");
+        operator.add("-");
+        operator.add("*");
+        operator.add("/");
+        operator.add("<<");
+        operator.add(">>");
+        operator.add("|");
+        operator.add("&");
+        operator.add("=");
+
+        HashSet<String>keyword=new HashSet<>();
+        keyword.add("abstract");
+        keyword.add("boolean");
+        keyword.add("break");
+        keyword.add("byte");
+        keyword.add("case");
+        keyword.add("catch");
+        keyword.add("char");
+        keyword.add("class");
+        keyword.add("continue");
+        keyword.add("default");
+        keyword.add("do");
+        keyword.add("double");
+        keyword.add("else");
+        keyword.add("extends");
+        keyword.add("final");
+        keyword.add("finally");
+        keyword.add("float");
+        keyword.add("implements");
+        keyword.add("import");
+        keyword.add("instanceof");
+        keyword.add("int");
+        keyword.add("interface");
+        keyword.add("long");
+        keyword.add("native");
+        keyword.add("new");
+        keyword.add("package");
+        keyword.add("protected");
+        keyword.add("public");
+        keyword.add("return");
+        keyword.add("short");
+        keyword.add("static");
+        keyword.add("super");
+        keyword.add("switch");
+        keyword.add("synchronized");
+        keyword.add("this");
+        keyword.add("throws");
+        keyword.add("transient");
+        keyword.add("try");
+        keyword.add("void");
+        keyword.add("volatile");
+        keyword.add("while");
+        keyword.add("strictfp");
+        keyword.add("enum");
+        keyword.add("goto");
+        keyword.add("const");
+        int counter=0;
+        int flag=0;
+        while(counter<=ss.length()){
+            String token="";
+            
+            if(Character.isAlphabetic(ss.charAt(counter)) && flag==0){
+                while(Character.isAlphabetic(ss.charAt(counter))){
+                    token+=ss.charAt(counter);
+                    counter++;
+                }
+                if(keyword.contains(token) )
+                {
+                    System.out.println("keyword:"+token);
+                }
+                else
+                {
+                    System.out.println("identifier:"+token);
+                }
+            }
+            else if(Character.isDigit(ss.charAt(counter))){
+                while(Character.isDigit(ss.charAt(counter))){
+                    token+=ss.charAt(counter); 
+                    counter++;
+                }
+                System.out.println("digit:"+token);         
+            }
+            else if(map.contains(String.valueOf(ss.charAt(counter))) )
+            {
+                token+=ss.charAt(counter);
+                counter++;
+                System.out.print(counter);
+                System.out.println("special symbol:"+token);         
+            }
+            else if(operator.contains(String.valueOf(ss.charAt(counter))) )
+            {
+                token+=ss.charAt(counter);  
+                counter++;
+                System.out.println("operator:"+token);         
+            }  
+        }
+    } 
+}

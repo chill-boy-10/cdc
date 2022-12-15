@@ -1,0 +1,56 @@
+import java.util.*;
+public class RECR{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        String production = sc.next();
+        StringBuilder str1 = new StringBuilder();
+        StringBuilder str2 = new StringBuilder();
+        StringBuilder str3 = new StringBuilder();
+        boolean f = true;
+
+        try{
+            for(int i=0; i<production.length(); i++){
+                if(f){
+                    if(production.charAt(i)=='-' && production.charAt(i+1)=='>'){
+                        i++;
+                        f = false;
+                        continue;
+                    }else if(production.charAt(i)>=65 && production.charAt(i)<=122){
+                        str1.append(production.charAt(i));
+                        continue;
+                    }
+                    else{
+                        throw new Exception();
+                    }
+                }else{
+                    for(int j=0; j<str1.length(); j++){
+                        if(production.charAt(i)!=str1.charAt(j)){
+                            throw new Exception();
+                        }else{
+                            i++;
+                        }
+                    }
+                }
+                while(production.charAt(i)!='|' && i<production.length()){
+                    str2.append(production.charAt(i));
+                    i++;
+                }
+                i++;
+                while(i<production.length()){
+                    str3.append(production.charAt(i));
+                    i++;
+                }
+                break;
+            }
+        }catch(Exception e){}
+        String s1="",s2="";
+        s1 = str1 + " -> ";
+        s1 += str3 + " X ";
+        s2 = " X ";
+        s2 += " -> ";
+        s2 += str2 + "X | e";
+        System.out.println(s1);
+        System.out.println(s1);
+    }
+}

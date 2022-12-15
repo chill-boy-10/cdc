@@ -1,0 +1,57 @@
+import java.util.*;
+public class FINITE{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter num of states: ");
+        int states = sc.nextInt();
+
+        System.out.println("Enter num of symbols: ");
+        int totalSymbols = sc.nextInt();
+
+        char[] symbols = new char[totalSymbols];
+        for(int i=0; i<totalSymbols; i++){
+            symbols[i] = sc.next().charAt(0);
+        }
+
+        System.out.println("Enter table data: ");
+        int table[][] = new int[states][totalSymbols];
+        for(int i=0; i<states; i++){
+            for(int j=0; j<totalSymbols; j++){
+                table[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Enter start state: ");
+        int startState = sc.nextInt();
+
+        System.out.println("Enter final state: ");
+        int finalState = sc.nextInt();
+
+        System.out.println("Enter String: ");
+        String str = sc.next();
+
+        int col = -1;
+        int row = startState;
+
+        for(int i=0;i<str.length();i++){
+            for(int j=0; j<totalSymbols; j++){
+                if(str.charAt(i)==symbols[j]){
+                    col = j;
+                }
+            }
+            if(col==-1){
+                System.out.println("String is Invalid");
+                break;
+            }
+            row = table[row][col];
+        }
+        if(row==finalState){
+            System.out.println("String is Accepted");
+        }
+        else{
+            System.out.println("String is not Accepted");
+        } 
+
+    }
+}

@@ -1,0 +1,54 @@
+import java.util.*;
+public class dfa {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter total number of state");
+        int state=sc.nextInt();
+        System.out.println("Enter total number of input sysmbol");
+        int symbol=sc.nextInt();
+
+
+        int[][] table=new int[state][symbol];
+        for(int i=0;i<state;i++){
+            for(int j=0;j<symbol;j++){
+                table[i][j]=sc.nextInt();
+            }
+        }
+        // System.out.println("Transaction table is:");
+        // for(int i=0;i<state;i++){
+        //     for(int j=0;j<symbol;j++){
+        //         System.out.println(table[i][j]);
+        //     }
+        // }
+        // System.out.println("Enter String :");
+        // String str=sc.nextLine();
+        String str="ababaaabbba";
+
+        int curt=0;
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)=='a' && (curt==0 || curt==1)){
+                System.out.println("String sbl: "+str.charAt(i));
+                curt=table[curt][0];
+                System.out.println("current state: "+curt);
+
+            }
+            else if(str.charAt(i)=='b' && (curt==0 || curt==1)){
+                System.out.println("String sbl: "+str.charAt(i));
+                curt=table[curt][1];
+                System.out.println("current state: "+curt);
+
+            }
+            
+        }
+        System.out.println(curt);
+        if(curt==1){
+            System.out.println("String is Accepted");
+        }
+        else{
+            System.out.println("String is not Accepted");
+        }
+
+
+    }
+    
+}

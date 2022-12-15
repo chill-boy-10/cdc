@@ -1,0 +1,70 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+public class SymbolMain {
+
+    static int MAX_OBJ = 10;
+    public static void main(String args[]) throws FileNotFoundException{
+        Scanner sc = new Scanner(new File("F:\\BVM SEM 7\\Complier Design\\practicals\\input.txt"));
+        SymbolTable ob[] = new SymbolTable[MAX_OBJ];
+        for(int i=0;i<MAX_OBJ;i++){
+            ob[i]=new SymbolTable();
+        }
+        int index=0;
+        String type=null;
+        System.out.println("Name \t Type \t Size \t Value \t Address");
+
+        while(sc.hasNext()){
+            String token;
+            token=sc.next();
+            int old_pos=0,del_pos=check(token,0);
+            if(del_pos==0){
+                type=token;
+            }
+            else{
+                do{
+                    StringBuilder var = new StringBuilder();
+                    for(int i=old_pos;i<del_pos;i++){
+                        var.append(token.charAt(i));
+                    }
+                    ob[index].putname(var.toString(), type);
+                    if(token.charAt(del_pos)=='='){
+                        old_pos=del_pos+1;
+                        del_pos=check(token,old_pos);
+
+                        if(del_pos!=0){
+                            StringBuilder temp = new StringBuilder();
+                            for(int i=old_pos;i<del_pos;i++){
+                                temp.append(token.charAt(i));
+                            }
+                            ob[index].putvalue(temp.toString());
+                        }
+                        else{
+                            System.out.println("Error");
+                        }
+                    }
+
+                    if(token.charAt(del_pos)==','||token.charAt(del_pos)==';'){
+                        index++;
+                        old_pos=del_pos+1;
+                        del_pos = check(token,old_pos);
+                    }
+                }while(del_pos!=0);
+            }
+        }
+
+        for(int i=0;i<index;i++){
+            ob[i].display();
+        }
+
+    }
+
+    public static int check(String str,int index){
+        for(int i=index;i<str.length();i++){
+            if(str.charAt(i)=='='||str.charAt(i)==','||str.charAt(i)==';'||str.charAt(i)=='+'||str.charAt(i)=='-'||str.charAt(i)=='*'||str.charAt(i)=='/'||str.charAt(i)=='%')
+                return i;
+        }
+        return 0;
+    }
+    
+}

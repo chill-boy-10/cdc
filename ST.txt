@@ -1,0 +1,50 @@
+
+public class SymbolTable {
+    String type,var,value;
+    int size,addSum;
+    static int lastSize;
+
+    public SymbolTable(){
+        type=new String();
+        var=new String();
+        value=new String();
+        size=0;
+    }
+
+    void putsize(String token){
+        int sum=0;
+        for(int i=0;i<var.length();i++){
+            char current = var.toLowerCase().charAt(i);
+            if(current >= '1' && current <= '9'){
+                sum+=(var.toLowerCase().charAt(i)-48)*Math.pow(10,i);
+            }
+            else
+                sum+=(var.toLowerCase().charAt(i)-96)*Math.pow(10,i);
+        }
+        sum%=10;
+        addSum=sum;
+        if(token.equals("float")){
+            size=4;
+        }
+        else if(token.equals("int")){
+            size=4;
+        }
+        else
+            size=2;
+    }
+
+    void putname(String nm,String ty){
+        var=nm;
+        type=ty;
+        putsize(ty);
+    }
+
+    void putvalue(String val){
+        value=val;
+    }
+
+    void display(){
+        System.out.println(var+"\t"+type+"\t"+size+"\t"+value+"\t"+(addSum+lastSize));
+        lastSize=addSum+lastSize+size;
+    }
+}
